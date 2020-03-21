@@ -1,0 +1,15 @@
+
+.settings/org.eclipse.jdt.core.prefs
+*.class
+*.MF
+*.prefs
+target/classes/application.properties
+target/classes/META-INF/maven/com.customer/product-managment/pom.properties
+target/classes/META-INF/maven/com.customer/product-managment/pom.xml
+.project
+.classpath
+target/product-managment-0.0.1-SNAPSHOT.jar.original
+target/product-managment-0.0.1-SNAPSHOT.jar
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/maven-archiver/pom.properties

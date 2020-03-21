@@ -56,7 +56,7 @@ public class ProductController {
 	}
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<?> deleteProduct(int id) {
+	public ResponseEntity<String> deleteProduct(int id) {
 		if (cache.getProductById(id) != null) {
 			cache.deleteProduct(id);
 			return new ResponseEntity<>("product deleted successfully", HttpStatus.ACCEPTED);
