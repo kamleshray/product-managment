@@ -26,7 +26,7 @@ public class ProductController {
 		this.cache = ProductCache.getInstance();
 	}
 
-	@GetMapping(value = "/getAllProducts")
+	@GetMapping("/getAllProducts")
 	public List<Product> getAllProducts() {
 		List<Product> allProducts = cache.getAllProducts();
 		return allProducts;
