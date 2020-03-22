@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+
+import com.product.exception.ExceptionResponse;
+import com.product.exception.GenericProductManagementException;
 import com.product.model.Product;
 
 public class ProductCache {
@@ -62,7 +66,12 @@ public class ProductCache {
 			}
 			return existingProduct;
 		}
-		throw new RuntimeException();
+		
+		ExceptionResponse exceptionResponse = new ExceptionResponse();
+		exceptionResponse.setMessage("product id not available");
+		exceptionResponse.setHttpstatus(HttpStatus.BAD_REQUEST);
+		
+		throw new GenericProductManagementException(exceptionResponse);
 		
 	}
 
