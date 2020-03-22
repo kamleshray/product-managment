@@ -27,22 +27,30 @@ public class ProductController {
 	}
 
 	@GetMapping("/getAllProducts")
-	public List<Product> getAllProducts() {
+	public ResponseEntity<List<Product>> getAllProducts() {
 		List<Product> allProducts = cache.getAllProducts();
-		return allProducts;
+		return new ResponseEntity<>(allProducts,HttpStatus.OK);
+
 	}
 
 	@PostMapping(value = "/addProduct")
-	public void addProducts(@RequestBody Product product) {
-
-		cache.addProduct(product);
+	public ResponseEntity<String> addProducts(@RequestBody Product product) {
+		
+		Product product1 = cache.getProductById(product.getId());
+		if (product1 != null) {
+			return new ResponseEntity<>("product is already available", HttpStatus.BAD_REQUEST);
+		}
+		cache.addProduct(product1);
+		return new ResponseEntity<>("product added successfully", HttpStatus.OK);
 	}
 
 	@GetMapping("/getProduct/{pid}")
-	public Product getProduct(@PathVariable("pid") int id) {
-		Product productById = cache.getProductById(id);
-		return productById;
-
+	public ResponseEntity<?> getProduct(@PathVariable("pid") int id) {
+		Product product = cache.getProductById(id);
+		if (product == null) {
+			return new ResponseEntity<>("product id not available",HttpStatus.BAD_REQUEST);
+		}
+		 return new ResponseEntity<>(product,HttpStatus.OK);
 	}
 
 	@PutMapping("/update")
@@ -62,8 +70,7 @@ public class ProductController {
 			return new ResponseEntity<>("product deleted successfully", HttpStatus.ACCEPTED);
 		}
 		return new ResponseEntity<>("product id not available", HttpStatus.BAD_REQUEST);
-		
-		
+
 	}
 
 }
